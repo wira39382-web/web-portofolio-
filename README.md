@@ -1,6 +1,6 @@
 # Prawira — Modern Dark Digital Portfolio
 
-**Status:** Tahap 1 — Design Foundation telah diimplementasikan pada root ini. Lihat `docs/07-PHASE-1-RUN-AND-REVIEW.md` untuk cara menjalankan, hasil QA, dan batas cakupan.
+**Status:** Visual Redesign V4 — Hero, Selected Works, About. Lihat [galeri before/after](output/v4/README.md) dan [catatan implementasi V4](docs/08-V4-IMPLEMENTATION-AND-REVIEW.md).
 
 Quick start: `npm ci`, `npm run dev`, lalu buka http://localhost:3000. Validasi: `npm run lint` dan `npm run build`.
 

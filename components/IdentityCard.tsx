@@ -1,42 +1,108 @@
-import { Arrow, Asterisk } from "./Icons";
+"use client";
+import dynamic from "next/dynamic";
+import { Component, useEffect, useRef, useState, type ReactNode } from "react";
+const Scene = dynamic(() => import("./IdentityScene"), { ssr: false });
+class SceneBoundary extends Component<
+  { children: ReactNode; onFailure: () => void },
+  { failed: boolean }
+> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  componentDidCatch() {
+    this.props.onFailure();
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
 export default function IdentityCard() {
+  const stage = useRef<HTMLDivElement>(null);
+  const [enabled, setEnabled] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [reduced, setReduced] = useState(true);
+  useEffect(() => {
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(motion.matches);
+    motion.addEventListener("change", update);
+    let supported = false;
+    try {
+      const c = document.createElement("canvas");
+      const gl = c.getContext("webgl2");
+      supported = !!gl;
+      gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    } catch {}
+    const frame = requestAnimationFrame(() => {
+      update();
+      setEnabled(supported);
+    });
+    const observer = new IntersectionObserver(([entry]) =>
+      setVisible(entry.isIntersecting),
+    );
+    if (stage.current) observer.observe(stage.current);
+    return () => {
+      cancelAnimationFrame(frame);
+      motion.removeEventListener("change", update);
+      observer.disconnect();
+    };
+  }, []);
   return (
     <div
-      className="identity-stage"
-      aria-label="Konsep kartu identitas dengan kedalaman CSS, foto belum tersedia"
+      ref={stage}
+      className={`identity-stage v4-identity ${ready ? "scene-ready" : ""}`}
+      data-renderer={ready ? "webgl" : "static"}
     >
-      <div className="identity-card">
-        <div className="card-slot" />
-        <div className="id-top">
-          <span>PW / IDENTITY</span>
-          <span aria-hidden="true">
-            <Asterisk />
-          </span>
-        </div>
-        <div className="id-photo">
-          <span className="id-monogram" aria-hidden="true">
-            pw.
-          </span>
-          <span className="id-photo-label">FOTO BELUM TERSEDIA</span>
-        </div>
-        <div className="id-bottom">
-          <span className="eyebrow">DESIGN & DIGITAL</span>
-          <p>
-            Prawira
-            <br />
-            Hutagalung<span>.</span>
-          </p>
-          <div className="id-rule">
-            <span>Social Media & Graphic Design</span>
-            <span aria-hidden="true">
-              <Arrow />
-            </span>
+      <div className="identity-light" aria-hidden="true" />
+      <div className="identity-fallback" aria-hidden="true">
+        <div className="static-card">
+          <div className="static-card-top">
+            P / W <span>PERSONAL PORTFOLIO</span>
           </div>
+          <div className="static-card-type">
+            PW<span>.</span>
+          </div>
+          <div className="static-card-photo">FOTO PERSONAL BELUM TERSEDIA</div>
+          <div className="static-card-name">
+            Prawira Wibawa
+            <br />
+            Hutagalung.
+          </div>
+          <div className="static-card-foot">SOCIAL MEDIA & GRAPHIC DESIGN</div>
         </div>
       </div>
+      {enabled && (
+        <SceneBoundary
+          onFailure={() => {
+            setReady(false);
+            setEnabled(false);
+          }}
+        >
+          <div className="identity-canvas" aria-hidden="true">
+            <Scene
+              reduced={reduced}
+              visible={visible}
+              onReady={() => setReady(true)}
+              onFailure={() => {
+                setReady(false);
+                setEnabled(false);
+              }}
+            />
+          </div>
+        </SceneBoundary>
+      )}
       <div className="identity-caption">
-        <span className="short-line" /> DIGITAL IDENTITY / CSS STUDY
+        <span className="short-line" /> PERSONAL IDENTITY{" "}
+        <span className="identity-mode">
+          {ready ? "3D STUDY" : "STATIC STUDY"}
+        </span>
       </div>
+      <span className="sr-only">
+        Kartu identitas Prawira. Area foto menggunakan monogram karena foto asli
+        belum tersedia.{" "}
+        {ready ? "Visual 3D aktif." : "Visual statis pengganti 3D."}
+      </span>
     </div>
   );
 }

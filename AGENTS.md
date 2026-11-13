@@ -35,3 +35,6 @@ You are building a premium, minimal, responsive personal portfolio for **Prawira
 - Respect user-provided dark palette: `#0B1220`, `#151F30`, `#3B82F6`, `#8AB4F8`, `#F1F5F9`, `#94A3B8`.
 
 When in doubt, simplify. Do not optimize for visual novelty at the expense of comprehension.
+
+## Active phase — Visual Redesign V4
+The owner has explicitly authorized the three signature scenes in `docs/07-CREATIVE-REDESIGN-V4.md`. Its R3F hero and asymmetric gallery direction supersede the Phase 1 CSS-only card and uniform-grid limitations above. Preserve content accuracy, routes, accessibility, and fallbacks. No deployment is authorized.

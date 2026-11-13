@@ -1,0 +1,17 @@
+{
+  "webgl": true,
+  "widths": [
+    1440,
+    1024,
+    768,
+    390,
+    360
+  ],
+  "noJavaScript": true,
+  "noWebGL": true,
+  "contextLoss": true,
+  "reducedMotion": true,
+  "mobileMenu": true,
+  "projectRoutes": 8,
+  "errors": []
+}

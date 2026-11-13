@@ -4,6 +4,8 @@ import experience from "@/content/experience.json";
 import { featured, projects } from "@/lib/projects";
 import ProjectCard from "./ProjectCard";
 import IdentityCard from "./IdentityCard";
+import SceneReveals from "./SceneReveals";
+import PortraitStage from "./PortraitStage";
 export function SectionLabel({
   number,
   children,
@@ -22,15 +24,17 @@ export function SectionLabel({
 export function Hero() {
   return (
     <section className="hero container" id="home">
+      <SceneReveals />
       <div className="hero-grid">
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">
-            PERSONAL PORTFOLIO <span>/</span> PRAWIRA
+            VISUAL THINKING <span>/</span> DIGITAL MAKING
           </p>
           <h1>
-            Prawira Wibawa
-            <br />
-            Hutagalung<span>.</span>
+            Prawira
+            <span className="hero-name-secondary">
+              Wibawa Hutagalung<span>.</span>
+            </span>
           </h1>
           <div className="hero-roles">
             <p>
@@ -124,25 +128,7 @@ export function About() {
       className="section container about-section"
       tabIndex={-1}
     >
-      <div className="portrait-frame">
-        <div className="portrait-top">
-          <span>PERSONAL PORTRAIT</span>
-          <span>PW / 01</span>
-        </div>
-        <span className="portrait-mark" aria-hidden="true">
-          pw.
-        </span>
-        <div className="portrait-caption">
-          <span className="portrait-cross" aria-hidden="true">
-            +
-          </span>
-          <p>
-            Foto personal
-            <br />
-            akan ditambahkan<small>Ruang untuk portrait asli Prawira.</small>
-          </p>
-        </div>
-      </div>
+      <PortraitStage />
       <div className="about-copy">
         <SectionLabel number="02">TENTANG SAYA</SectionLabel>
         <h2>

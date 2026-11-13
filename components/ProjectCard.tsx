@@ -19,17 +19,48 @@ export function ProjectVisual({
           <Arrow />
         </span>
       </div>
-      <span className="visual-monogram" aria-hidden="true">
-        {project.slug.startsWith("agrinex")
-          ? "Ag."
-          : project.slug.startsWith("komdigi")
-            ? "K."
-            : project.slug.startsWith("desa")
-              ? "SR."
-              : "PW."}
-      </span>
+      <div className="project-stage-type" aria-hidden="true">
+        {project.slug === "agrinex-social-media" ? (
+          <>
+            <span className="stage-kicker">SOCIAL MEDIA / VISUAL DESIGN</span>
+            <strong>
+              AgriNex<span>.</span>
+            </strong>
+            <em>Konten visual. Identitas digital.</em>
+          </>
+        ) : project.slug === "komdigi-graphic-design" ? (
+          <>
+            <span className="stage-kicker">GRAPHIC DESIGN / INTERNSHIP</span>
+            <strong>
+              Komdigi<span>.</span>
+            </strong>
+            <em>Konten & materi grafis</em>
+          </>
+        ) : project.slug === "desa-sei-rotan-website" ? (
+          <>
+            <span className="stage-kicker">COMMUNITY / WEB CREATION</span>
+            <strong>
+              Sei
+              <br />
+              Rotan<span>.</span>
+            </strong>
+          </>
+        ) : project.slug === "agrinex-business-website" ? (
+          <>
+            <span className="stage-kicker">
+              BUSINESS PROFILE / WEB CREATION
+            </span>
+            <strong>
+              AgriNex<span>.</span>
+            </strong>
+            <em>Profil usaha dalam ruang digital.</em>
+          </>
+        ) : (
+          <strong>{project.name}</strong>
+        )}
+      </div>
       <div className="visual-bottom">
-        <span>Preview belum tersedia</span>
+        <span>Aset proyek belum tersedia</span>
         <span>ASET ASLI MENYUSUL</span>
       </div>
     </div>
@@ -43,7 +74,7 @@ export default function ProjectCard({
   index: number;
 }) {
   return (
-    <article className="project-card">
+    <article className={`project-card project-position-${index}`}>
       <Link href={`/projects/${project.slug}`} className="project-link">
         <ProjectVisual project={project} index={index} />
         <div className="project-meta">
