@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "width": 360,
+      "overflow": false
+    }
+  ],
+  "caseStudies": 8,
+  "notFound": 404,
+  "mobileMenu": true,
+  "reducedMotion": true,
+  "keyboardSkipLink": true,
+  "noJavaScript": true,
+  "pageErrors": []
+}

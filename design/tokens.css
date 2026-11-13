@@ -1,0 +1,30 @@
+/* Canonical design tokens. Codex may convert to Tailwind theme or CSS variables. */
+:root {
+  --color-bg: #0B1220;
+  --color-surface: #151F30;
+  --color-accent: #3B82F6;
+  --color-accent-soft: #8AB4F8;
+  --color-text: #F1F5F9;
+  --color-muted: #94A3B8;
+  --color-border: rgba(148, 163, 184, 0.18);
+  --color-focus: #8AB4F8;
+  --font-heading: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --container-max: 1240px;
+  --radius-card: 20px;
+  --radius-button: 12px;
+  --space-section-desktop: 112px;
+  --space-section-mobile: 72px;
+  --duration-fast: 180ms;
+  --duration-medium: 280ms;
+  --duration-reveal: 520ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
