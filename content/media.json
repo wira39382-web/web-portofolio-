@@ -1,3 +1,5 @@
 {
-  "portrait": null
+  "portrait": null,
+  "heroPortrait": null,
+  "heroPosition": "70% 40%"
 }

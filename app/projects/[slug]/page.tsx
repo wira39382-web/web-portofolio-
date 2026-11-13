@@ -30,7 +30,7 @@ export default async function Project({
   return (
     <>
       <Navbar />
-      <main id="main" className="container case-study">
+      <main id="main" tabIndex={-1} className="container case-study">
         <Link className="text-link" href="/#work">
           ← Kembali ke karya
         </Link>

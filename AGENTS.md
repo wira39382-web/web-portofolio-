@@ -36,5 +36,5 @@ You are building a premium, minimal, responsive personal portfolio for **Prawira
 
 When in doubt, simplify. Do not optimize for visual novelty at the expense of comprehension.
 
-## Active phase — Visual Redesign V4
-The owner has explicitly authorized the three signature scenes in `docs/07-CREATIVE-REDESIGN-V4.md`. Its R3F hero and asymmetric gallery direction supersede the Phase 1 CSS-only card and uniform-grid limitations above. Preserve content accuracy, routes, accessibility, and fallbacks. No deployment is authorized.
+## Active phase — Motion V7 opening sequence
+The owner authorizes only the first three scenes now: photographic Hero (honest placeholder until supplied), separate Digital Identity stage, and the editorial transition to Selected Works. Read MOTION_DIRECTION_V7.md and CODEX_MOTION_PROMPT_V7.md; their motion direction supersedes older conflicting instructions, while the current user scope defers later-section redesign. Preserve existing data, routes, accessibility, and fallbacks. Native scroll only. No deployment authorized.

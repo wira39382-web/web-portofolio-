@@ -21,31 +21,54 @@ export default function IdentityCard() {
   const stage = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [revealed, setRevealed] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(true);
   useEffect(() => {
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReduced(motion.matches);
     motion.addEventListener("change", update);
-    let supported = false;
-    try {
-      const c = document.createElement("canvas");
-      const gl = c.getContext("webgl2");
-      supported = !!gl;
-      gl?.getExtension("WEBGL_lose_context")?.loseContext();
-    } catch {}
-    const frame = requestAnimationFrame(() => {
-      update();
-      setEnabled(supported);
-    });
-    const observer = new IntersectionObserver(([entry]) =>
-      setVisible(entry.isIntersecting),
+    let started = false;
+    let frame = 0;
+    let inView = false;
+    const updateVisibility = () => setVisible(inView && !document.hidden);
+    const preload = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || started) return;
+        started = true;
+        let supported = false;
+        try {
+          const c = document.createElement("canvas");
+          const gl = c.getContext("webgl2");
+          supported = !!gl;
+          gl?.getExtension("WEBGL_lose_context")?.loseContext();
+        } catch {}
+        frame = requestAnimationFrame(() => {
+          update();
+          setEnabled(supported);
+        });
+      },
+      { rootMargin: "250px 0px" },
     );
-    if (stage.current) observer.observe(stage.current);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (entry.intersectionRatio >= 0.2) setRevealed(true);
+        updateVisibility();
+      },
+      { threshold: [0, 0.2] },
+    );
+    if (stage.current) {
+      observer.observe(stage.current);
+      preload.observe(stage.current);
+    }
+    document.addEventListener("visibilitychange", updateVisibility);
     return () => {
       cancelAnimationFrame(frame);
       motion.removeEventListener("change", update);
+      document.removeEventListener("visibilitychange", updateVisibility);
       observer.disconnect();
+      preload.disconnect();
     };
   }, []);
   return (
@@ -83,6 +106,7 @@ export default function IdentityCard() {
             <Scene
               reduced={reduced}
               visible={visible}
+              revealed={revealed}
               onReady={() => setReady(true)}
               onFailure={() => {
                 setReady(false);

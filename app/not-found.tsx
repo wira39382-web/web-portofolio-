@@ -2,7 +2,7 @@ import { Arrow } from "@/components/Icons";
 import Link from "next/link";
 export default function NotFound() {
   return (
-    <main id="main" className="container case-study">
+    <main id="main" tabIndex={-1} className="container case-study">
       <p className="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</p>
       <h1>
         Belum ada cerita

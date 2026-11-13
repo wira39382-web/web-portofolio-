@@ -77,8 +77,18 @@ function createPrint() {
   t.anisotropy = 4;
   return t;
 }
-function Card({ reduced, onReady }: { reduced: boolean; onReady: () => void }) {
+function Card({
+  reduced,
+  revealed,
+  onReady,
+}: {
+  reduced: boolean;
+  revealed: boolean;
+  onReady: () => void;
+}) {
   const ref = useRef<THREE.Group>(null);
+  const firstVisible = useRef<number | null>(null);
+  const touch = useMemo(() => matchMedia("(pointer: coarse)").matches, []);
   const [texture, setTexture] = useState<THREE.CanvasTexture | null>(null);
   const { gl, invalidate } = useThree();
   const geometry = useMemo(
@@ -138,9 +148,18 @@ function Card({ reduced, onReady }: { reduced: boolean; onReady: () => void }) {
   useFrame(({ clock, pointer }, delta) => {
     if (!ref.current) return;
     const t = clock.elapsedTime;
-    const touch = matchMedia("(pointer: coarse)").matches;
-    const targetX = 0.08 + (reduced || touch ? 0 : pointer.y * 0.1),
-      targetY = -0.32 + (reduced || touch ? 0 : pointer.x * 0.12);
+    if (revealed && firstVisible.current === null) firstVisible.current = t;
+    const elapsed =
+      firstVisible.current === null
+        ? 0
+        : Math.min(1, (t - firstVisible.current) / 0.95);
+    const entrance = reduced ? 1 : 1 - Math.pow(1 - elapsed, 3);
+    ref.current.scale.setScalar(0.86 + 0.14 * entrance);
+    ref.current.position.z = -0.5 * (1 - entrance);
+    ref.current.rotation.z = -0.06 - 0.1 * (1 - entrance);
+    const targetX = 0.06 + (reduced || touch ? 0 : pointer.y * 0.08),
+      targetY =
+        -0.2 - 0.06 * (1 - entrance) + (reduced || touch ? 0 : pointer.x * 0.1);
     ref.current.rotation.x = THREE.MathUtils.damp(
       ref.current.rotation.x,
       targetX,
@@ -158,7 +177,7 @@ function Card({ reduced, onReady }: { reduced: boolean; onReady: () => void }) {
   return (
     <>
       <primitive object={environment.texture} attach="environment" />
-      <group ref={ref} rotation={[0.08, -0.32, -0.12]}>
+      <group ref={ref} rotation={[0.06, -0.26, -0.16]}>
         <mesh geometry={geometry}>
           <meshStandardMaterial
             color="#54769d"
@@ -167,7 +186,9 @@ function Card({ reduced, onReady }: { reduced: boolean; onReady: () => void }) {
           />
         </mesh>
         <mesh geometry={face} position={[0, 0, 0.102]}>
-          <meshStandardMaterial
+          <meshPhysicalMaterial
+            clearcoat={0.55}
+            clearcoatRoughness={0.32}
             key={texture?.uuid ?? "pending"}
             map={texture}
             color={texture ? "#ffffff" : "#17243a"}
@@ -187,11 +208,13 @@ function Card({ reduced, onReady }: { reduced: boolean; onReady: () => void }) {
 export default function IdentityScene({
   reduced,
   visible,
+  revealed,
   onReady,
   onFailure,
 }: {
   reduced: boolean;
   visible: boolean;
+  revealed: boolean;
   onReady: () => void;
   onFailure: () => void;
 }) {
@@ -219,7 +242,7 @@ export default function IdentityScene({
       <ambientLight intensity={0.7} />
       <directionalLight position={[-3, 5, 5]} intensity={2.4} color="#e5edff" />
       <directionalLight position={[4, 0, 2]} intensity={1.8} color="#8ab4f8" />
-      <Card reduced={reduced} onReady={ready} />
+      <Card reduced={reduced} revealed={revealed} onReady={ready} />
     </Canvas>
   );
 }

@@ -3,7 +3,8 @@ import Link from "next/link";
 import experience from "@/content/experience.json";
 import { featured, projects } from "@/lib/projects";
 import ProjectCard from "./ProjectCard";
-import IdentityCard from "./IdentityCard";
+import { CinematicHero } from "./OpeningScenes";
+export { DigitalIdentity } from "./OpeningScenes";
 import SceneReveals from "./SceneReveals";
 import PortraitStage from "./PortraitStage";
 export function SectionLabel({
@@ -22,66 +23,24 @@ export function SectionLabel({
   );
 }
 export function Hero() {
-  return (
-    <section className="hero container" id="home">
-      <SceneReveals />
-      <div className="hero-grid">
-        <div className="hero-copy">
-          <p className="eyebrow hero-eyebrow">
-            VISUAL THINKING <span>/</span> DIGITAL MAKING
-          </p>
-          <h1>
-            Prawira
-            <span className="hero-name-secondary">
-              Wibawa Hutagalung<span>.</span>
-            </span>
-          </h1>
-          <div className="hero-roles">
-            <p>
-              Social Media &<br />
-              Graphic Designer
-            </p>
-            <p>AI-Assisted Web Creator</p>
-          </div>
-          <p className="hero-description">
-            Menyusun konten visual, mengelola media sosial, dan membuat website
-            dengan dukungan AI.
-          </p>
-          <div className="hero-actions">
-            <a className="button primary" href="#work">
-              Lihat Proyek{" "}
-              <span aria-hidden="true">
-                <Arrow />
-              </span>
-            </a>
-            <a className="text-link" href="#about">
-              Tentang Saya <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-        </div>
-        <IdentityCard />
-      </div>
-      <div className="hero-footer">
-        <span>
-          SOCIAL MEDIA <i>·</i> GRAPHIC DESIGN <i>·</i> WEB CREATION
-        </span>
-        <a href="#work">
-          JELAJAHI PORTFOLIO <span aria-hidden="true">↓</span>
-        </a>
-      </div>
-    </section>
-  );
+  return <CinematicHero />;
 }
 export function Work() {
   return (
     <section className="work-section section" id="work" tabIndex={-1}>
       <div className="container">
-        <SectionLabel number="01">SELECTED WORKS</SectionLabel>
+        <div className="work-portal-light" aria-hidden="true" />
+        <SectionLabel number="02">SELECTED WORKS</SectionLabel>
         <div className="section-heading">
-          <h2>
-            Ide menjadi visual.
-            <br />
-            <span>Visual menjadi cerita.</span>
+          <h2 className="work-portal-title">
+            <span className="work-title-line">
+              <span>Selected</span>
+            </span>
+            <span className="work-title-line">
+              <span>
+                Works<span className="work-period">.</span>
+              </span>
+            </span>
           </h2>
           <p>
             Proyek terpilih dalam media sosial, desain grafis, dan pembuatan
@@ -128,9 +87,10 @@ export function About() {
       className="section container about-section"
       tabIndex={-1}
     >
+      <SceneReveals />
       <PortraitStage />
       <div className="about-copy">
-        <SectionLabel number="02">TENTANG SAYA</SectionLabel>
+        <SectionLabel number="03">TENTANG SAYA</SectionLabel>
         <h2>
           Di antara visual
           <br />
@@ -188,7 +148,7 @@ export function Expertise() {
   return (
     <section className="section expertise-section" id="expertise" tabIndex={-1}>
       <div className="container">
-        <SectionLabel number="03">KEAHLIAN</SectionLabel>
+        <SectionLabel number="04">KEAHLIAN</SectionLabel>
         <div className="section-heading">
           <h2>
             Tiga bidang.
@@ -227,7 +187,7 @@ export function Expertise() {
 export function Journey() {
   return (
     <section id="journey" className="section container" tabIndex={-1}>
-      <SectionLabel number="04">JOURNEY & CERTIFICATES</SectionLabel>
+      <SectionLabel number="05">JOURNEY & CERTIFICATES</SectionLabel>
       <div className="section-heading">
         <h2>
           Belajar, berkarya,
@@ -290,7 +250,7 @@ export function Contact() {
   return (
     <section id="contact" className="contact-section section" tabIndex={-1}>
       <div className="container">
-        <SectionLabel number="05">KONTAK</SectionLabel>
+        <SectionLabel number="06">KONTAK</SectionLabel>
         <div className="contact-grid">
           <h2>
             Setiap koneksi,
@@ -316,7 +276,7 @@ export function Contact() {
           <Link className="wordmark" href="/">
             PRAWIRA<span>.</span>
           </Link>
-          <span>PORTFOLIO / DESIGN FOUNDATION V3</span>
+          <span>PORTFOLIO / PRAWIRA WIBAWA HUTAGALUNG</span>
           <a className="text-link" href="#home">
             Kembali ke atas <span aria-hidden="true">↑</span>
           </a>

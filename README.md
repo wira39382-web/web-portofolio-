@@ -1,6 +1,6 @@
 # Prawira — Modern Dark Digital Portfolio
 
-**Status:** Visual Redesign V4 — Hero, Selected Works, About. Lihat [galeri before/after](output/v4/README.md) dan [catatan implementasi V4](docs/08-V4-IMPLEMENTATION-AND-REVIEW.md).
+**Status:** Motion V7 — Hero → Digital Identity → Selected Works. Lihat [screenshot dan video actual build](output/v7/README.md) serta [catatan implementasi](docs/09-MOTION-V7-IMPLEMENTATION.md).
 
 Quick start: `npm ci`, `npm run dev`, lalu buka http://localhost:3000. Validasi: `npm run lint` dan `npm run build`.
 

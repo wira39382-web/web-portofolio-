@@ -11,6 +11,10 @@ export default function SceneReveals() {
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
+          if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            observer.unobserve(entry.target);
+            continue;
+          }
           entry.target.animate(
             entry.target.classList.contains("portrait-frame")
               ? [
@@ -32,7 +36,7 @@ export default function SceneReveals() {
       { threshold: 0.16 },
     );
     document
-      .querySelectorAll(".work-grid .project-card:first-child, .portrait-frame")
+      .querySelectorAll(".portrait-frame")
       .forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);

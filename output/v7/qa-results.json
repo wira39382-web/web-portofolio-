@@ -1,0 +1,57 @@
+{
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900,
+      "initialCLS": 0,
+      "overflow": false,
+      "ctaAboveFold": true
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "initialCLS": 0,
+      "overflow": false,
+      "ctaAboveFold": true
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "initialCLS": 0,
+      "overflow": false,
+      "ctaAboveFold": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "initialCLS": 0,
+      "overflow": false,
+      "ctaAboveFold": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "initialCLS": 0,
+      "overflow": false,
+      "ctaAboveFold": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "initialCLS": 0,
+      "overflow": false,
+      "ctaAboveFold": true
+    }
+  ],
+  "webgl": true,
+  "scrollChoreography": true,
+  "keyboard": true,
+  "touch": true,
+  "reducedMotion": true,
+  "noJavaScript": true,
+  "noWebGL": true,
+  "contextLoss": true,
+  "slowCPU4x": true,
+  "projectRoutes": 8,
+  "pageErrors": []
+}

@@ -1,6 +1,8 @@
+import OpeningMotion from "@/components/OpeningMotion";
 import Navbar from "@/components/Navbar";
 import {
   Hero,
+  DigitalIdentity,
   Work,
   About,
   Expertise,
@@ -11,9 +13,13 @@ export default function Home() {
   return (
     <>
       <Navbar home />
-      <main id="main">
-        <Hero />
-        <Work />
+      <main id="main" tabIndex={-1}>
+        <OpeningMotion />
+        <div className="opening-sequence">
+          <Hero />
+          <DigitalIdentity />
+          <Work />
+        </div>
         <About />
         <Expertise />
         <Journey />
